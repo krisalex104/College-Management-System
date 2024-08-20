@@ -8,4 +8,6 @@ public interface StudentService {
      StudentDto fetchStudentById(Long studentId);
 
      StudentDto assignSubjectToStudent(Long subjectId,Long studentId);
+
+     StudentDto updateStudentDetails(Long studentId,StudentDto studentDto);
 }

@@ -72,6 +72,24 @@ public class StudentServiceImpl implements StudentService {
                 .build();
     }
 
+    @Override
+    public StudentDto updateStudentDetails(Long studentId,StudentDto studentDto) {
+        isExistByStudentId(studentId);
+
+        Student student = studentRepository.findById(studentId).get();
+        studentDto.setId(studentId);
+        modelMapper.map(studentDto,student);
+        Student updatedStudent = studentRepository.save(student);
+
+        return StudentDto.builder()
+                .id(updatedStudent.getId())
+                .name(updatedStudent.getName())
+                .subjects(buildSubjectDto(updatedStudent.getSubjects()))
+                .professors(buildProfessorDto(updatedStudent.getProfessors()))
+                .build();
+
+    }
+
 
     private List<ProfessorDto> buildProfessorDto(Set<Professor> professorList){
         List<ProfessorDto> professorDtoList =new ArrayList<>();

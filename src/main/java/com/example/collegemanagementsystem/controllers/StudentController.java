@@ -38,4 +38,10 @@ public class StudentController {
         return ResponseEntity.ok(studentDto);
 
     }
+
+    @PutMapping(path = "/{studentId}")
+    public ResponseEntity<StudentDto> updateStudentDetails(@RequestBody StudentDto studentDto,@PathVariable Long studentId){
+        StudentDto updateStudentDetails = studentService.updateStudentDetails(studentId, studentDto);
+        return ResponseEntity.ok(updateStudentDetails);
+    }
 }
