@@ -90,6 +90,25 @@ public class StudentServiceImpl implements StudentService {
 
     }
 
+    @Override
+    public List<StudentDto> fetchAllStudents() {
+        List<Student> all = studentRepository.findAll();
+        return buildStudentDto(all);
+    }
+
+
+    private List<StudentDto> buildStudentDto(List<Student> students){
+        List<StudentDto> studentDtoList = new ArrayList<>();
+
+        for (Student student : students) {
+            StudentDto studentDto = StudentDto.builder()
+                    .id(student.getId())
+                    .name(student.getName())
+                    .build();
+            studentDtoList.add(studentDto);
+        }
+        return studentDtoList;
+    }
 
     private List<ProfessorDto> buildProfessorDto(Set<Professor> professorList){
         List<ProfessorDto> professorDtoList =new ArrayList<>();
